@@ -1,0 +1,355 @@
+﻿# Title Creation Permission - character interactions.
+# A permission is an entry in the vassal's variable list tcp_title_creation_permissions.
+# It lasts tcp_permission_duration years and is used up when the vassal creates that title
+# (see tcp_on_actions.txt).
+
+@tcp_permission_duration = 5
+
+# A vassal asks their top liege for permission to create a title.
+tcp_request_title_creation_interaction = {
+	category = interaction_category_vassal
+	icon = request_clerical_title_creation
+	interface_priority = 60
+
+	desc = tcp_request_title_creation_interaction_desc
+	# What the vassal writes to their liege. The first kind of vassal that matches is used,
+	# and each kind has two letters (see tcp_pick_letter_variant_effect).
+	notification_text = {
+		first_valid = {
+			# Rival, or a vassal who dislikes their liege
+			triggered_desc = {
+				trigger = {
+					tcp_letter_resentful_trigger = yes
+					tcp_letter_variant_2_trigger = yes
+				}
+				desc = tcp_request_title_creation_notification_resentful_2
+			}
+			triggered_desc = {
+				trigger = { tcp_letter_resentful_trigger = yes }
+				desc = tcp_request_title_creation_notification_resentful
+			}
+			# A title once held by the vassal's dynasty
+			triggered_desc = {
+				trigger = {
+					tcp_letter_ancestral_trigger = yes
+					tcp_letter_variant_2_trigger = yes
+				}
+				desc = tcp_request_title_creation_notification_ancestral_2
+			}
+			triggered_desc = {
+				trigger = { tcp_letter_ancestral_trigger = yes }
+				desc = tcp_request_title_creation_notification_ancestral
+			}
+			# The liege's primary heir
+			triggered_desc = {
+				trigger = {
+					tcp_letter_heir_trigger = yes
+					tcp_letter_variant_2_trigger = yes
+				}
+				desc = tcp_request_title_creation_notification_heir_2
+			}
+			triggered_desc = {
+				trigger = { tcp_letter_heir_trigger = yes }
+				desc = tcp_request_title_creation_notification_heir
+			}
+			# Close family
+			triggered_desc = {
+				trigger = {
+					tcp_letter_family_trigger = yes
+					tcp_letter_variant_2_trigger = yes
+				}
+				desc = tcp_request_title_creation_notification_family_2
+			}
+			triggered_desc = {
+				trigger = { tcp_letter_family_trigger = yes }
+				desc = tcp_request_title_creation_notification_family
+			}
+			# Friend, or a vassal who likes their liege
+			triggered_desc = {
+				trigger = {
+					tcp_letter_loyal_trigger = yes
+					tcp_letter_variant_2_trigger = yes
+				}
+				desc = tcp_request_title_creation_notification_loyal_2
+			}
+			triggered_desc = {
+				trigger = { tcp_letter_loyal_trigger = yes }
+				desc = tcp_request_title_creation_notification_loyal
+			}
+			# Ambitious
+			triggered_desc = {
+				trigger = {
+					tcp_letter_ambitious_trigger = yes
+					tcp_letter_variant_2_trigger = yes
+				}
+				desc = tcp_request_title_creation_notification_ambitious_2
+			}
+			triggered_desc = {
+				trigger = { tcp_letter_ambitious_trigger = yes }
+				desc = tcp_request_title_creation_notification_ambitious
+			}
+			# Arrogant
+			triggered_desc = {
+				trigger = {
+					tcp_letter_arrogant_trigger = yes
+					tcp_letter_variant_2_trigger = yes
+				}
+				desc = tcp_request_title_creation_notification_arrogant_2
+			}
+			triggered_desc = {
+				trigger = { tcp_letter_arrogant_trigger = yes }
+				desc = tcp_request_title_creation_notification_arrogant
+			}
+			# Humble or content
+			triggered_desc = {
+				trigger = {
+					tcp_letter_humble_trigger = yes
+					tcp_letter_variant_2_trigger = yes
+				}
+				desc = tcp_request_title_creation_notification_humble_2
+			}
+			triggered_desc = {
+				trigger = { tcp_letter_humble_trigger = yes }
+				desc = tcp_request_title_creation_notification_humble
+			}
+			# Great renown (prestige level 4 or higher)
+			triggered_desc = {
+				trigger = {
+					tcp_letter_renowned_trigger = yes
+					tcp_letter_variant_2_trigger = yes
+				}
+				desc = tcp_request_title_creation_notification_renowned_2
+			}
+			triggered_desc = {
+				trigger = { tcp_letter_renowned_trigger = yes }
+				desc = tcp_request_title_creation_notification_renowned
+			}
+			# A kingdom or an empire
+			triggered_desc = {
+				trigger = {
+					tcp_letter_crown_trigger = yes
+					tcp_letter_variant_2_trigger = yes
+				}
+				desc = tcp_request_title_creation_notification_crown_2
+			}
+			triggered_desc = {
+				trigger = { tcp_letter_crown_trigger = yes }
+				desc = tcp_request_title_creation_notification_crown
+			}
+			# Anyone else
+			triggered_desc = {
+				trigger = { tcp_letter_variant_2_trigger = yes }
+				desc = tcp_request_title_creation_notification_2
+			}
+			desc = tcp_request_title_creation_notification
+		}
+	}
+
+	target_type = title
+	target_filter = top_liege_de_jure_titles
+	target_source = actor
+	show_all_targets = no
+
+	# The request opens a window for the player who receives it
+	popup_on_receive = yes
+
+	ai_maybe = no
+	ai_min_reply_days = 2
+	ai_max_reply_days = 7
+
+	# Each vassal may ask once every 2 years
+	cooldown_against_recipient = { years = 2 }
+
+	# A liege receives at most one request a year from AI vassals, so a large realm is not
+	# flooded with them. Players can always send theirs.
+	recipient_recieve_cooldown = { years = 1 }
+	ignore_recipient_recieve_cooldown = { is_ai = no }
+
+	is_shown = {
+		scope:actor = {
+			tcp_needs_permission_trigger = yes
+			top_liege = scope:recipient
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			is_imprisoned = no
+			NOT = { is_at_war_with = scope:recipient }
+		}
+	}
+
+	can_be_picked_title = {
+		tcp_valid_permission_title_trigger = {
+			TITLE = scope:target
+			VASSAL = scope:actor
+			LIEGE = scope:recipient
+		}
+	}
+
+	# can_be_picked_title is only used to fill the list, so the target is checked again on send
+	has_valid_target_showing_failures_only = {
+		tcp_valid_permission_title_trigger = {
+			TITLE = scope:target
+			VASSAL = scope:actor
+			LIEGE = scope:recipient
+		}
+	}
+
+	auto_accept = no
+
+	on_send = {
+		scope:actor = { tcp_pick_letter_variant_effect = yes }
+	}
+
+	on_accept = {
+		scope:target = { save_scope_as = tcp_title }
+		tcp_send_answer_toast_effect = {
+			VASSAL = scope:actor
+			LIEGE = scope:recipient
+			ANSWER = accepted
+		}
+		scope:actor = {
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = tcp_request_title_creation_accepted_toast
+				left_icon = scope:recipient
+				right_icon = scope:actor
+				add_to_variable_list = {
+					name = tcp_title_creation_permissions
+					target = scope:tcp_title
+					years = @tcp_permission_duration
+				}
+				custom_tooltip = tcp_permission_granted_tt
+			}
+		}
+	}
+
+	on_decline = {
+		scope:target = { save_scope_as = tcp_title }
+		# The answer is chosen before the refusal changes the vassal's opinion
+		tcp_send_answer_toast_effect = {
+			VASSAL = scope:actor
+			LIEGE = scope:recipient
+			ANSWER = refused
+		}
+		scope:actor = {
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = tcp_request_title_creation_declined_toast
+				left_icon = scope:recipient
+				right_icon = scope:actor
+				custom_tooltip = tcp_permission_declined_tt
+				add_opinion = {
+					target = scope:recipient
+					modifier = tcp_refused_title_creation_opinion
+				}
+			}
+		}
+	}
+
+	# The top liege is always a player, who answers in person, so there is no ai_accept.
+
+	# AI vassals ask only for titles they could create: they control most of the de jure counties
+	ai_targets = {
+		ai_recipients = top_liege
+	}
+	ai_frequency_by_tier = {
+		barony = 0
+		county = 60
+		duchy = 48
+		kingdom = 48
+		empire = 48
+		hegemony = 0
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 25
+			tcp_controls_majority_of_title_trigger = {
+				TITLE = scope:target
+				VASSAL = scope:actor
+			}
+		}
+
+		ai_value_modifier = {
+			who = scope:actor
+			ai_greed = 0.5
+			ai_boldness = 0.25
+		}
+
+		modifier = {
+			factor = 0
+			NOT = {
+				tcp_controls_majority_of_title_trigger = {
+					TITLE = scope:target
+					VASSAL = scope:actor
+				}
+			}
+		}
+	}
+}
+
+# The top liege grants a vassal permission to create a title, without being asked.
+tcp_grant_title_creation_interaction = {
+	category = interaction_category_vassal
+	icon = grant_titles_interaction
+	interface_priority = 59
+
+	desc = tcp_grant_title_creation_interaction_desc
+
+	target_type = title
+	target_filter = top_liege_de_jure_titles
+	target_source = recipient
+	show_all_targets = no
+
+	is_shown = {
+		scope:recipient = {
+			tcp_needs_permission_trigger = yes
+			top_liege = scope:actor
+		}
+	}
+
+	can_be_picked_title = {
+		tcp_valid_permission_title_trigger = {
+			TITLE = scope:target
+			VASSAL = scope:recipient
+			LIEGE = scope:actor
+		}
+	}
+
+	has_valid_target_showing_failures_only = {
+		tcp_valid_permission_title_trigger = {
+			TITLE = scope:target
+			VASSAL = scope:recipient
+			LIEGE = scope:actor
+		}
+	}
+
+	auto_accept = yes
+
+	on_accept = {
+		scope:target = { save_scope_as = tcp_title }
+		tcp_send_answer_toast_effect = {
+			VASSAL = scope:recipient
+			LIEGE = scope:actor
+			ANSWER = accepted
+		}
+		scope:recipient = {
+			send_interface_toast = {
+				type = event_toast_effect_good
+				title = tcp_grant_title_creation_toast
+				left_icon = scope:actor
+				right_icon = scope:recipient
+				add_to_variable_list = {
+					name = tcp_title_creation_permissions
+					target = scope:tcp_title
+					years = @tcp_permission_duration
+				}
+				custom_tooltip = tcp_permission_granted_tt
+			}
+		}
+	}
+}

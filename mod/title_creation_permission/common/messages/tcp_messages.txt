@@ -1,0 +1,17 @@
+﻿# Title Creation Permission - message types.
+# A vassal's answer to the liege's decision on a title creation request. Shown in the message
+# feed, so it does not interrupt the game.
+
+tcp_msg_vassal_answer_accepted = {
+	display = feed
+	icon = "vassal"
+	title = tcp_answer_accepted_title
+	style = good
+}
+
+tcp_msg_vassal_answer_refused = {
+	display = feed
+	icon = "vassal"
+	title = tcp_answer_refused_title
+	style = bad
+}

@@ -1,0 +1,147 @@
+﻿# Title Creation Permission - scripted effects.
+
+# Picks which of the two letters of each kind the vassal writes. Run when the request is
+# sent, so the letter stays the same while the liege reads it. Kept 2 years, as long as
+# the vassal must wait to ask again; without it, the first letter of each kind is used.
+# Root is the vassal.
+tcp_pick_letter_variant_effect = {
+	random_list = {
+		50 = {
+			set_variable = {
+				name = tcp_letter_variant
+				value = 1
+				years = 2
+			}
+		}
+		50 = {
+			set_variable = {
+				name = tcp_letter_variant
+				value = 2
+				years = 2
+			}
+		}
+	}
+}
+
+# Tells $LIEGE$, in the message feed, how $VASSAL$ takes the answer to a title creation request.
+# $ANSWER$ is accepted (also used when the liege grants permission unasked) or refused.
+# The first kind of vassal that matches is used.
+tcp_send_answer_toast_effect = {
+	$VASSAL$ = { save_scope_as = tcp_vassal }
+	$LIEGE$ = { save_scope_as = tcp_liege }
+	if = {
+		limit = {
+			$VASSAL$ = {
+				OR = {
+					has_relation_rival = $LIEGE$
+					opinion = {
+						target = $LIEGE$
+						value <= -20
+					}
+				}
+			}
+		}
+		$LIEGE$ = {
+			send_interface_message = {
+				type = tcp_msg_vassal_answer_$ANSWER$
+				title = tcp_answer_$ANSWER$_title
+				desc = tcp_answer_$ANSWER$_resentful
+				left_icon = $VASSAL$
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			$VASSAL$ = {
+				has_trait = ambitious
+			}
+		}
+		$LIEGE$ = {
+			send_interface_message = {
+				type = tcp_msg_vassal_answer_$ANSWER$
+				title = tcp_answer_$ANSWER$_title
+				desc = tcp_answer_$ANSWER$_ambitious
+				left_icon = $VASSAL$
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			$VASSAL$ = {
+				has_trait = arrogant
+			}
+		}
+		$LIEGE$ = {
+			send_interface_message = {
+				type = tcp_msg_vassal_answer_$ANSWER$
+				title = tcp_answer_$ANSWER$_title
+				desc = tcp_answer_$ANSWER$_arrogant
+				left_icon = $VASSAL$
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			$VASSAL$ = {
+				OR = {
+					has_trait = humble
+					has_trait = content
+				}
+			}
+		}
+		$LIEGE$ = {
+			send_interface_message = {
+				type = tcp_msg_vassal_answer_$ANSWER$
+				title = tcp_answer_$ANSWER$_title
+				desc = tcp_answer_$ANSWER$_humble
+				left_icon = $VASSAL$
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			$VASSAL$ = {
+				is_close_family_of = $LIEGE$
+			}
+		}
+		$LIEGE$ = {
+			send_interface_message = {
+				type = tcp_msg_vassal_answer_$ANSWER$
+				title = tcp_answer_$ANSWER$_title
+				desc = tcp_answer_$ANSWER$_family
+				left_icon = $VASSAL$
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			$VASSAL$ = {
+				OR = {
+					has_relation_friend = $LIEGE$
+					opinion = {
+						target = $LIEGE$
+						value >= 50
+					}
+				}
+			}
+		}
+		$LIEGE$ = {
+			send_interface_message = {
+				type = tcp_msg_vassal_answer_$ANSWER$
+				title = tcp_answer_$ANSWER$_title
+				desc = tcp_answer_$ANSWER$_loyal
+				left_icon = $VASSAL$
+			}
+		}
+	}
+	else = {
+		$LIEGE$ = {
+			send_interface_message = {
+				type = tcp_msg_vassal_answer_$ANSWER$
+				title = tcp_answer_$ANSWER$_title
+				desc = tcp_answer_$ANSWER$
+				left_icon = $VASSAL$
+			}
+		}
+	}
+}

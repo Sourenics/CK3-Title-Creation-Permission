@@ -1,0 +1,14 @@
+﻿# Title Creation Permission - game rules.
+# Who needs their top liege's permission to create titles, when the top liege is feudal with
+# Absolute Crown Authority or an administrative emperor:
+#	vanilla:       nobody, titles are created as in vanilla
+#	player_realms: vassals whose top liege is a player (realms with an AI top liege stay vanilla)
+tcp_title_creation_permission = {
+	categories = { flavor }
+
+	default = tcp_title_creation_permission_player_realms
+
+	tcp_title_creation_permission_vanilla = {}
+
+	tcp_title_creation_permission_player_realms = {}
+}

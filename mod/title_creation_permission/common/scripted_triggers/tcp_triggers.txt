@@ -1,0 +1,164 @@
+﻿# Title Creation Permission - scripted triggers.
+
+# Does the scoped ruler forbid their vassals to create titles without permission?
+# Root is a top liege.
+#	Feudal government with absolute Crown Authority (crown_authority_3, the fourth and highest level)
+#	Administrative government with an empire (or higher) as primary title
+tcp_ruler_restricts_title_creation_trigger = {
+	OR = {
+		AND = {
+			government_has_flag = government_is_feudal
+			has_realm_law = crown_authority_3
+		}
+		AND = {
+			government_has_flag = government_is_administrative
+			exists = primary_title
+			primary_title.tier >= tier_empire
+		}
+	}
+}
+
+# Does the scoped character need permission from their top liege to create titles?
+# Root is the character.
+# Only the top liege counts: under a player emperor, the vassals of an AI king need the
+# emperor's permission too, because their top liege is the player.
+tcp_needs_permission_trigger = {
+	has_game_rule = tcp_title_creation_permission_player_realms
+	is_independent_ruler = no
+	exists = top_liege
+	top_liege != this
+	top_liege = {
+		is_ai = no
+		tcp_ruler_restricts_title_creation_trigger = yes
+	}
+}
+
+# Does the scoped character hold a permission to create $TITLE$?
+# Root is the character.
+tcp_has_permission_for_title_trigger = {
+	is_target_in_variable_list = {
+		name = tcp_title_creation_permissions
+		target = $TITLE$
+	}
+}
+
+# Can $TITLE$ be the object of a permission for $VASSAL$, who asks $LIEGE$ (their top liege)?
+# Mirrors what a vassal could create: an uncreated, landed title of duchy tier or higher,
+# below the liege's primary title tier. Whether the vassal meets the vanilla creation
+# requirements (counties, cost) is still checked by the game when they create it.
+tcp_valid_permission_title_trigger = {
+	$TITLE$ = {
+		tier >= tier_duchy
+		tier < $LIEGE$.primary_title.tier
+		is_title_created = no
+		is_titular = no
+		is_landless_type_title = no
+		is_noble_family_title = no
+	}
+	$VASSAL$ = {
+		NOT = { tcp_has_permission_for_title_trigger = { TITLE = $TITLE$ } }
+	}
+}
+
+# Does $VASSAL$ control (directly or through their vassals) at least 51% of the de jure counties of $TITLE$?
+# Only used by the AI to decide which titles to ask for.
+tcp_controls_majority_of_title_trigger = {
+	$TITLE$ = {
+		any_de_jure_county = {
+			percent >= 0.51
+			holder ?= {
+				OR = {
+					this = $VASSAL$
+					is_vassal_or_below_of = $VASSAL$
+				}
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------
+# Letters and answers
+# These triggers read the interaction scopes: scope:actor is the vassal
+# asking, scope:recipient their top liege and scope:target the title.
+# The order they are checked in is set in tcp_interactions.txt.
+# ---------------------------------------------------------------------
+
+# Second letter of each kind, picked at random when the request is sent
+# (tcp_pick_letter_variant_effect), so the letter does not change while it is read
+tcp_letter_variant_2_trigger = {
+	scope:actor = {
+		exists = var:tcp_letter_variant
+		var:tcp_letter_variant = 2
+	}
+}
+
+# A rival, or a vassal who dislikes their liege
+tcp_letter_resentful_trigger = {
+	scope:actor = {
+		OR = {
+			has_relation_rival = scope:recipient
+			opinion = {
+				target = scope:recipient
+				value <= -20
+			}
+		}
+	}
+}
+
+# The title was once held by the vassal's dynasty
+tcp_letter_ancestral_trigger = {
+	exists = scope:actor.dynasty
+	scope:target = {
+		any_past_holder = { dynasty ?= scope:actor.dynasty }
+	}
+}
+
+# The vassal is the liege's primary heir
+tcp_letter_heir_trigger = {
+	scope:actor = { is_primary_heir_of = scope:recipient }
+}
+
+# Close family
+tcp_letter_family_trigger = {
+	scope:actor = { is_close_family_of = scope:recipient }
+}
+
+# A friend, or a vassal who likes their liege
+tcp_letter_loyal_trigger = {
+	scope:actor = {
+		OR = {
+			has_relation_friend = scope:recipient
+			opinion = {
+				target = scope:recipient
+				value >= 50
+			}
+		}
+	}
+}
+
+tcp_letter_ambitious_trigger = {
+	scope:actor = { has_trait = ambitious }
+}
+
+tcp_letter_arrogant_trigger = {
+	scope:actor = { has_trait = arrogant }
+}
+
+tcp_letter_humble_trigger = {
+	scope:actor = {
+		OR = {
+			has_trait = humble
+			has_trait = content
+		}
+	}
+}
+
+# A vassal of great renown
+tcp_letter_renowned_trigger = {
+	scope:actor = { prestige_level >= 4 }
+}
+
+# A kingdom or an empire
+tcp_letter_crown_trigger = {
+	scope:target.tier >= tier_kingdom
+}

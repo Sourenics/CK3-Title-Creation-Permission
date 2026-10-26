@@ -1,0 +1,20 @@
+﻿# Title Creation Permission - overrides only the can_create_title entry of the vanilla
+# common/scripted_rules/00_rules.txt. In vanilla it is "always = yes" and is left for modders.
+# Other scripted rules are not touched.
+
+# Used to restrict a character from creating titles, in addition to any title-specific limitation from the can_create block in the title definition.
+#
+# Supported scopes:
+#	root ( character )
+#		the ruler that might create a title
+#	scope:title ( title )
+#		the title to create or not
+can_create_title = {
+	trigger_if = {
+		limit = { tcp_needs_permission_trigger = yes }
+		custom_tooltip = {
+			text = tcp_needs_permission_to_create_tt
+			tcp_has_permission_for_title_trigger = { TITLE = scope:title }
+		}
+	}
+}

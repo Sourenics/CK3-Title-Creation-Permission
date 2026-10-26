@@ -1,0 +1,7 @@
+﻿# Title Creation Permission - opinion modifiers.
+
+# Refused to let me create a title. Given to a vassal whose request is declined.
+tcp_refused_title_creation_opinion = {
+	opinion = -30
+	years = 10
+}

@@ -1,0 +1,26 @@
+﻿# Title Creation Permission - on_actions. The vanilla on_title_gain is only extended through
+# its on_actions list, so no vanilla effect block is overridden.
+
+# root = the new holder, scope:title = the title, scope:transfer_type = how it was gained
+on_title_gain = {
+	on_actions = { tcp_on_title_gain }
+}
+
+# A permission is used up when the vassal creates that title
+tcp_on_title_gain = {
+	trigger = {
+		scope:transfer_type = flag:created
+		has_variable_list = tcp_title_creation_permissions
+	}
+	effect = {
+		if = {
+			limit = {
+				tcp_has_permission_for_title_trigger = { TITLE = scope:title }
+			}
+			remove_list_variable = {
+				name = tcp_title_creation_permissions
+				target = scope:title
+			}
+		}
+	}
+}
