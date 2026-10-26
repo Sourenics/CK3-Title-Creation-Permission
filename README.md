@@ -7,7 +7,7 @@ A Crusader Kings III mod that puts title creation in the hands of the crown. In 
 - **Game version:** 1.20.x
 - **Mod version:** 1.0.0
 - **Author:** [Sourenics](https://github.com/Sourenics)
-- **Steam Workshop:** coming soon
+- **Steam Workshop:** [Title Creation Permission](https://steamcommunity.com/sharedfiles/filedetails/?id=3827886721)
 
 ## Features
 
