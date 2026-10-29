@@ -5,7 +5,7 @@
 A Crusader Kings III mod that puts title creation in the hands of the crown. In a feudal realm with Absolute Crown Authority (or the level you choose), or in an administrative empire, vassals can no longer create duchies, kingdoms or empires on their own: they have to ask their top liege for permission. New titles in your realm are only made when you allow it, so you are the one who hands them out.
 
 - **Game version:** 1.20.x
-- **Mod version:** 1.1.1
+- **Mod version:** 1.1.2
 - **Author:** [Sourenics](https://github.com/Sourenics)
 - **Steam Workshop:** [Title Creation Permission](https://steamcommunity.com/sharedfiles/filedetails/?id=3827886721)
 

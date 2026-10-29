@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.2
+
+- **Fixed:** the vassal's answer to your decision on a title creation request did not show its text in the message feed, and `error.log` reported the missing keys `tcp_msg_vassal_answer_accepted_desc` and `tcp_msg_vassal_answer_refused_desc`. The answer letters now show as intended.
+- **Fixed:** the remaining "scope:target trigger [ Failed context switch ]" errors, which now came from the title picker of **Request Title Creation** and **Grant Title Creation**: the game offers it an empty title, which is now left out without errors.
+
 ## 1.1.1
 
 - **Fixed:** AI vassals could fail to send their **Request Title Creation** letters, so a player liege might never receive a request. The game checked whether the requested title was valid before the vassal had picked one, and that check failed with "scope:target trigger [ Failed context switch ]" errors in `error.log`. It now waits until a title is picked, which is then checked in full as before. The same errors appeared when opening the interaction menu of **Grant Title Creation** and are gone too.

@@ -6,6 +6,9 @@ tcp_msg_vassal_answer_accepted = {
 	display = feed
 	icon = "vassal"
 	title = tcp_answer_accepted_title
+	# Vanilla key that shows the desc given by send_interface_message
+	desc = event_message_text
+	tooltip = event_message_text
 	style = good
 }
 
@@ -13,5 +16,8 @@ tcp_msg_vassal_answer_refused = {
 	display = feed
 	icon = "vassal"
 	title = tcp_answer_refused_title
+	# Vanilla key that shows the desc given by send_interface_message
+	desc = event_message_text
+	tooltip = event_message_text
 	style = bad
 }

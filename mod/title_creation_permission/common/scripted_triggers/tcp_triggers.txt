@@ -74,7 +74,9 @@ tcp_has_permission_for_title_trigger = {
 # Mirrors what a vassal could create: an uncreated, landed title of duchy tier or higher,
 # below the liege's primary title tier. Whether the vassal meets the vanilla creation
 # requirements (counties, cost) is still checked by the game when they create it.
+# The title picker can offer a null title (shown as "None of"): exists rejects it without errors.
 tcp_valid_permission_title_trigger = {
+	exists = $TITLE$
 	$TITLE$ = {
 		tier >= tier_duchy
 		tier < $LIEGE$.primary_title.tier
