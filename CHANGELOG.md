@@ -2,7 +2,7 @@
 
 ## 1.1.1
 
-- **Fixed:** opening the interaction menu on a vassal or on your top liege filled `error.log` with "scope:target trigger [ Failed context switch ]" errors. The game checks whether the title of **Request Title Creation** and **Grant Title Creation** is valid before any title is picked; that check now waits until there is one. The errors were harmless and nothing else changes.
+- **Fixed:** AI vassals could fail to send their **Request Title Creation** letters, so a player liege might never receive a request. The game checked whether the requested title was valid before the vassal had picked one, and that check failed with "scope:target trigger [ Failed context switch ]" errors in `error.log`. It now waits until a title is picked, which is then checked in full as before. The same errors appeared when opening the interaction menu of **Grant Title Creation** and are gone too.
 
 ## 1.1.0
 
