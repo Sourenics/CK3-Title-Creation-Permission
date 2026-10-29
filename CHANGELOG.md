@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- **Fixed:** opening the interaction menu on a vassal or on your top liege filled `error.log` with "scope:target trigger [ Failed context switch ]" errors. The game checks whether the title of **Request Title Creation** and **Grant Title Creation** is valid before any title is picked; that check now waits until there is one. The errors were harmless and nothing else changes.
+
 ## 1.1.0
 
 - New game rule **TCP: Required Crown Authority** to choose the lowest Crown Authority at which a feudal top liege requires permission: Absolute (default, as before), High or higher, Limited or higher, or Any. Administrative emperors always require permission. Requested on the Steam Workshop.

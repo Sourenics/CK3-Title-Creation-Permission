@@ -189,10 +189,14 @@ tcp_request_title_creation_interaction = {
 
 	# can_be_picked_title is only used to fill the list, so the target is checked again on send
 	has_valid_target_showing_failures_only = {
-		tcp_valid_permission_title_trigger = {
-			TITLE = scope:target
-			VASSAL = scope:actor
-			LIEGE = scope:recipient
+		# The interaction menu also checks this before any title is picked
+		trigger_if = {
+			limit = { exists = scope:target }
+			tcp_valid_permission_title_trigger = {
+				TITLE = scope:target
+				VASSAL = scope:actor
+				LIEGE = scope:recipient
+			}
 		}
 	}
 
@@ -321,10 +325,14 @@ tcp_grant_title_creation_interaction = {
 	}
 
 	has_valid_target_showing_failures_only = {
-		tcp_valid_permission_title_trigger = {
-			TITLE = scope:target
-			VASSAL = scope:recipient
-			LIEGE = scope:actor
+		# The interaction menu also checks this before any title is picked
+		trigger_if = {
+			limit = { exists = scope:target }
+			tcp_valid_permission_title_trigger = {
+				TITLE = scope:target
+				VASSAL = scope:recipient
+				LIEGE = scope:actor
+			}
 		}
 	}
 
