@@ -3,7 +3,17 @@
  setting_tcp_title_creation_permission_vanilla:0 "Vanilla"
  setting_tcp_title_creation_permission_vanilla_desc:0 "All [vassals|E] create [titles|E] as in vanilla."
  setting_tcp_title_creation_permission_player_realms:0 "Player Realms"
- setting_tcp_title_creation_permission_player_realms_desc:0 "Only in realms whose [top_liege|E] is a player: all [vassals|E] there, direct or indirect, need the player's permission to create [titles|E] when the player is [feudal|E] with [GetLaw('crown_authority_3').GetName], or is an [administrative_government|E] [emperor|E]. Realms with an AI [top_liege|E] work as in vanilla.\n\nThey can ask for permission with the #V Request Title Creation#! interaction, and the [top_liege|E] can grant it with #V Grant Title Creation#!."
+ setting_tcp_title_creation_permission_player_realms_desc:0 "Only in realms whose [top_liege|E] is a player: all [vassals|E] there, direct or indirect, need the player's permission to create [titles|E] when the player is [feudal|E] with the [crown_authority|E] set by the #V TCP: Required Crown Authority#! rule (by default, [GetLaw('crown_authority_3').GetName]), or is an [administrative_government|E] [emperor|E]. Realms with an AI [top_liege|E] work as in vanilla.\n\nThey can ask for permission with the #V Request Title Creation#! interaction, and the [top_liege|E] can grant it with #V Grant Title Creation#!."
+
+ rule_tcp_required_crown_authority:0 "#color_light_red TCP:#! Required Crown Authority"
+ setting_tcp_required_crown_authority_3:0 "Absolute"
+ setting_tcp_required_crown_authority_3_desc:0 "A [feudal|E] [top_liege|E] requires permission only with [GetLaw('crown_authority_3').GetName]."
+ setting_tcp_required_crown_authority_2:0 "High or higher"
+ setting_tcp_required_crown_authority_2_desc:0 "A [feudal|E] [top_liege|E] requires permission with [GetLaw('crown_authority_2').GetName] or higher."
+ setting_tcp_required_crown_authority_1:0 "Limited or higher"
+ setting_tcp_required_crown_authority_1_desc:0 "A [feudal|E] [top_liege|E] requires permission with [GetLaw('crown_authority_1').GetName] or higher."
+ setting_tcp_required_crown_authority_0:0 "Any"
+ setting_tcp_required_crown_authority_0_desc:0 "A [feudal|E] [top_liege|E] always requires permission, whatever their [crown_authority|E], even with [GetLaw('crown_authority_0').GetName]."
 
  tcp_needs_permission_to_create_tt:0 "Your [top_liege|E] has given you permission to create this [title|E]"
 

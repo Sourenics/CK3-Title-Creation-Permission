@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+- New game rule **TCP: Required Crown Authority** to choose the lowest Crown Authority at which a feudal top liege requires permission: Absolute (default, as before), High or higher, Limited or higher, or Any. Administrative emperors always require permission. Requested on the Steam Workshop.
+
 ## 1.0.0
 
 - First release.

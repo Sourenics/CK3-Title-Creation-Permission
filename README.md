@@ -2,10 +2,10 @@
 
 # Title Creation Permission
 
-A Crusader Kings III mod that puts title creation in the hands of the crown. In a feudal realm with Absolute Crown Authority, or in an administrative empire, vassals can no longer create duchies, kingdoms or empires on their own: they have to ask their top liege for permission. New titles in your realm are only made when you allow it, so you are the one who hands them out.
+A Crusader Kings III mod that puts title creation in the hands of the crown. In a feudal realm with Absolute Crown Authority (or the level you choose), or in an administrative empire, vassals can no longer create duchies, kingdoms or empires on their own: they have to ask their top liege for permission. New titles in your realm are only made when you allow it, so you are the one who hands them out.
 
 - **Game version:** 1.20.x
-- **Mod version:** 1.0.0
+- **Mod version:** 1.1.0
 - **Author:** [Sourenics](https://github.com/Sourenics)
 - **Steam Workshop:** [Title Creation Permission](https://steamcommunity.com/sharedfiles/filedetails/?id=3827886721)
 
@@ -13,7 +13,7 @@ A Crusader Kings III mod that puts title creation in the hands of the crown. In 
 
 Vassals need their **top liege's permission** to create a title when the top liege is a player and:
 
-- has the **feudal** government with **Absolute Crown Authority** (the fourth and highest Crown Authority level), or
+- has the **feudal** government with **Absolute Crown Authority** (the fourth and highest Crown Authority level; a lower level can be chosen with a game rule), or
 - has the **administrative** government and an **empire** (or higher) as primary title.
 
 This applies to every vassal in the realm, direct or indirect, whatever their own government.
@@ -42,9 +42,9 @@ Each kind of vassal has **two letters**, picked at random when the request is se
 
 **The permission** is for one specific title and lasts **5 years**. It is used up when the vassal creates that title. The vassal still has to meet the usual requirements to create it (de jure counties, cost). The title creation screen shows when permission is missing.
 
-Everything else stays vanilla: independent rulers, vassals of other governments or with lower Crown Authority, and the top liege themselves create titles as usual.
+Everything else stays vanilla: independent rulers, vassals of other governments or with a lower Crown Authority than required, and the top liege themselves create titles as usual.
 
-### Game rule
+### Game rules
 
 The game rule **TCP: Title Creation Permission** turns the restriction on or off:
 
@@ -52,6 +52,15 @@ The game rule **TCP: Title Creation Permission** turns the restriction on or off
 - **Vanilla:** titles are created as in vanilla.
 
 Realms ruled by the AI are never affected, so the AI keeps creating titles as in vanilla and stays as unpredictable as ever.
+
+The game rule **TCP: Required Crown Authority** sets the lowest Crown Authority at which a feudal top liege requires permission:
+
+- **Absolute** (default): only with Absolute Crown Authority.
+- **High or higher**: with High or Absolute Crown Authority.
+- **Limited or higher**: with Limited, High or Absolute Crown Authority.
+- **Any**: always, even with Autonomous Vassals.
+
+Administrative emperors always require permission, whatever this rule says.
 
 ### Languages
 

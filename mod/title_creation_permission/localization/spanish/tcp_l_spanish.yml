@@ -3,7 +3,17 @@
  setting_tcp_title_creation_permission_vanilla:0 "Juego base"
  setting_tcp_title_creation_permission_vanilla_desc:0 "Los [vassals|E] crean [titles|E] como en el juego base."
  setting_tcp_title_creation_permission_player_realms:0 "Reinos de jugadores"
- setting_tcp_title_creation_permission_player_realms_desc:0 "Solo en los reinos cuyo [top_liege|E] es un jugador: todos sus [vassals|E], directos o indirectos, necesitan el permiso del jugador para crear [titles|E] cuando este es [feudal|E] con [GetLaw('crown_authority_3').GetName], o es un [emperor|E] con [administrative_government|E]. Los reinos con un [top_liege|E] de la IA funcionan como en el juego base.\n\nPueden pedir permiso con la interacción #V Pedir creación de título#!, y el [top_liege|E] puede concederlo con #V Conceder creación de título#!."
+ setting_tcp_title_creation_permission_player_realms_desc:0 "Solo en los reinos cuyo [top_liege|E] es un jugador: todos sus [vassals|E], directos o indirectos, necesitan el permiso del jugador para crear [titles|E] cuando este es [feudal|E] con la [crown_authority|E] que fija la regla #V TCP: Autoridad de la corona necesaria#! (por defecto, [GetLaw('crown_authority_3').GetName]), o es un [emperor|E] con [administrative_government|E]. Los reinos con un [top_liege|E] de la IA funcionan como en el juego base.\n\nPueden pedir permiso con la interacción #V Pedir creación de título#!, y el [top_liege|E] puede concederlo con #V Conceder creación de título#!."
+
+ rule_tcp_required_crown_authority:0 "#color_light_red TCP:#! Autoridad de la corona necesaria"
+ setting_tcp_required_crown_authority_3:0 "Absoluta"
+ setting_tcp_required_crown_authority_3_desc:0 "Un [top_liege|E] [feudal|E] exige permiso solo con [GetLaw('crown_authority_3').GetName]."
+ setting_tcp_required_crown_authority_2:0 "Alta o superior"
+ setting_tcp_required_crown_authority_2_desc:0 "Un [top_liege|E] [feudal|E] exige permiso con [GetLaw('crown_authority_2').GetName] o superior."
+ setting_tcp_required_crown_authority_1:0 "Limitada o superior"
+ setting_tcp_required_crown_authority_1_desc:0 "Un [top_liege|E] [feudal|E] exige permiso con [GetLaw('crown_authority_1').GetName] o superior."
+ setting_tcp_required_crown_authority_0:0 "Cualquiera"
+ setting_tcp_required_crown_authority_0_desc:0 "Un [top_liege|E] [feudal|E] siempre exige permiso, tenga la [crown_authority|E] que tenga, incluso con [GetLaw('crown_authority_0').GetName]."
 
  tcp_needs_permission_to_create_tt:0 "Tu [top_liege|E] te ha dado permiso para crear este [title|E]"
 

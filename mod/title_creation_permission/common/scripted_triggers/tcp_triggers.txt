@@ -1,14 +1,42 @@
 ﻿# Title Creation Permission - scripted triggers.
 
+# Does the scoped feudal ruler have at least the Crown Authority set by the
+# tcp_required_crown_authority game rule? Root is a top liege.
+tcp_has_required_crown_authority_trigger = {
+	trigger_if = {
+		limit = { has_game_rule = tcp_required_crown_authority_0 }
+		always = yes
+	}
+	trigger_else_if = {
+		limit = { has_game_rule = tcp_required_crown_authority_1 }
+		OR = {
+			has_realm_law = crown_authority_1
+			has_realm_law = crown_authority_2
+			has_realm_law = crown_authority_3
+		}
+	}
+	trigger_else_if = {
+		limit = { has_game_rule = tcp_required_crown_authority_2 }
+		OR = {
+			has_realm_law = crown_authority_2
+			has_realm_law = crown_authority_3
+		}
+	}
+	trigger_else = {
+		has_realm_law = crown_authority_3
+	}
+}
+
 # Does the scoped ruler forbid their vassals to create titles without permission?
 # Root is a top liege.
-#	Feudal government with absolute Crown Authority (crown_authority_3, the fourth and highest level)
+#	Feudal government with the Crown Authority set by the tcp_required_crown_authority
+#	game rule (by default, Absolute Crown Authority: crown_authority_3)
 #	Administrative government with an empire (or higher) as primary title
 tcp_ruler_restricts_title_creation_trigger = {
 	OR = {
 		AND = {
 			government_has_flag = government_is_feudal
-			has_realm_law = crown_authority_3
+			tcp_has_required_crown_authority_trigger = yes
 		}
 		AND = {
 			government_has_flag = government_is_administrative
