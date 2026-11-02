@@ -5,20 +5,20 @@
 A Crusader Kings III mod that puts title creation in the hands of the crown. In a feudal realm with Absolute Crown Authority (or the level you choose), or in an administrative empire, vassals can no longer create duchies, kingdoms or empires on their own: they have to ask their top liege for permission. New titles in your realm are only made when you allow it, so you are the one who hands them out.
 
 - **Game version:** 1.20.x
-- **Mod version:** 1.1.2
+- **Mod version:** 1.2.0
 - **Author:** [Sourenics](https://github.com/Sourenics)
 - **Steam Workshop:** [Title Creation Permission](https://steamcommunity.com/sharedfiles/filedetails/?id=3827886721)
 
 ## Features
 
-Vassals need their **top liege's permission** to create a title when the top liege is a player and:
+Vassals need their **top liege's permission** to create a title when the top liege is a player (or any ruler, with the **All Realms** game rule) and:
 
 - has the **feudal** government with **Absolute Crown Authority** (the fourth and highest Crown Authority level; a lower level can be chosen with a game rule), or
 - has the **administrative** government and an **empire** (or higher) as primary title.
 
 This applies to every vassal in the realm, direct or indirect, whatever their own government.
 
-**Asking for permission.** Vassals have a new interaction, **Request Title Creation**, on their top liege. They choose the title they want to create, and the liege accepts or refuses. A vassal who is refused gets **−30 opinion** of their liege for 10 years (*Refused My Title Creation*). AI vassals only ask for titles they could create, those whose de jure counties they mostly control, and not often: each vassal asks at most once every 2 years, and a liege receives at most one request a year from AI vassals, so large realms are not flooded with them.
+**Asking for permission.** Vassals have a new interaction, **Request Title Creation**, on their top liege. They choose the title they want to create, and the liege accepts or refuses. With the **All Realms** game rule, an AI liege decides by their opinion of the vassal, whether they share a dynasty or are close family, the rank of the title (kingdoms and empires are harder) and whether the vassal is a powerful vassal or a faction member. A vassal who is refused gets **−30 opinion** of their liege for 10 years (*Refused My Title Creation*). AI vassals only ask for titles they could create, those whose de jure counties they mostly control, and not often: each vassal asks at most once every 2 years, and a liege receives at most one request a year from AI vassals, so large realms are not flooded with them.
 
 **Letters from your vassals.** A request arrives as a letter that names the title. What the vassal writes depends on who they are, what they think of you and what they ask for; the first that fits is used:
 
@@ -46,12 +46,13 @@ Everything else stays vanilla: independent rulers, vassals of other governments 
 
 ### Game rules
 
-The game rule **TCP: Title Creation Permission** turns the restriction on or off:
+The game rule **TCP: Title Creation Permission** chooses where the restriction applies:
 
-- **Player Realms** (default): every vassal of a player top liege needs the player's permission, including the vassals of an AI king under a player emperor, since only the top liege counts.
+- **Player Realms** (default): every vassal of a player top liege needs the player's permission, including the vassals of an AI king under a player emperor, since only the top liege counts. Realms ruled by the AI work as in vanilla, so the AI keeps creating titles as usual and stays as unpredictable as ever.
+- **All Realms:** every realm, whether its top liege is a player or the AI. AI vassals have to ask their AI top liege, who answers on their own, so AI realms such as the Holy Roman Empire are no longer carved up by kingdoms the emperor never allowed. **This includes you:** if you are the vassal of an AI top liege, you need their permission too. Requested on the Steam Workshop.
 - **Vanilla:** titles are created as in vanilla.
 
-Realms ruled by the AI are never affected, so the AI keeps creating titles as in vanilla and stays as unpredictable as ever.
+With **All Realms**, keep in mind that the restriction still depends on the top liege's Crown Authority, set by the next rule. With the default (Absolute), an AI realm with a lower Crown Authority is not affected; choose a lower level if you want those realms to need permission too.
 
 The game rule **TCP: Required Crown Authority** sets the lowest Crown Authority at which a feudal top liege requires permission:
 
@@ -87,6 +88,7 @@ Subscribe on the Steam Workshop page and enable the mod in the Paradox launcher.
 - Overrides the vanilla scripted rule `can_create_title` from `common/scripted_rules/00_rules.txt` in its own file. In vanilla this rule is empty and left for modders, so no vanilla behaviour is lost, but other mods that override the same rule are not compatible without a patch. No other scripted rule is changed.
 - Adds to the `on_title_gain` on_action without overriding it.
 - The restriction applies to title creation through the title screen, which is where the game checks `can_create_title`. Titles formed through decisions or events may not be affected.
+- The **All Realms** rule relies on the AI checking `can_create_title` when it creates titles, as the player does. Titles the AI forms through decisions or events may not be affected.
 - Can be added to an existing save and removed at any time.
 
 ## Reporting bugs

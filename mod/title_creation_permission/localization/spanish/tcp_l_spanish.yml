@@ -4,6 +4,8 @@
  setting_tcp_title_creation_permission_vanilla_desc:0 "Los [vassals|E] crean [titles|E] como en el juego base."
  setting_tcp_title_creation_permission_player_realms:0 "Reinos de jugadores"
  setting_tcp_title_creation_permission_player_realms_desc:0 "Solo en los reinos cuyo [top_liege|E] es un jugador: todos sus [vassals|E], directos o indirectos, necesitan el permiso del jugador para crear [titles|E] cuando este es [feudal|E] con la [crown_authority|E] que fija la regla #V TCP: Autoridad de la corona necesaria#! (por defecto, [GetLaw('crown_authority_3').GetName]), o es un [emperor|E] con [administrative_government|E]. Los reinos con un [top_liege|E] de la IA funcionan como en el juego base.\n\nPueden pedir permiso con la interacción #V Pedir creación de título#!, y el [top_liege|E] puede concederlo con #V Conceder creación de título#!."
+ setting_tcp_title_creation_permission_all_realms:0 "Todos los reinos"
+ setting_tcp_title_creation_permission_all_realms_desc:0 "En todos los reinos, tanto si su [top_liege|E] es un jugador como si es la IA: todos los [vassals|E], directos o indirectos, necesitan el permiso de su [top_liege|E] para crear [titles|E] cuando este es [feudal|E] con la [crown_authority|E] que fija la regla #V TCP: Autoridad de la corona necesaria#! (por defecto, [GetLaw('crown_authority_3').GetName]), o es un [emperor|E] con [administrative_government|E]. Esto te incluye a ti si eres vasallo de un [top_liege|E] de la IA.\n\nUn [top_liege|E] de la IA responde a cada petición según su opinión del vasallo, si comparten dinastía o son familia cercana, el rango del [title|E] y si el vasallo es poderoso o está en una facción."
 
  rule_tcp_required_crown_authority:0 "#color_light_red TCP:#! Autoridad de la corona necesaria"
  setting_tcp_required_crown_authority_3:0 "Absoluta"
@@ -51,6 +53,12 @@
  tcp_grant_title_creation_toast:0 "Creación de título permitida"
  tcp_permission_granted_tt:0 "Puedes crear [tcp_title.GetName] en los próximos #V 5#! años"
  tcp_permission_declined_tt:0 "No puedes crear [tcp_title.GetName]"
+
+ tcp_ai_same_dynasty:0 "Misma dinastía"
+ tcp_ai_close_family:0 "Familia cercana"
+ tcp_ai_kingdom_tier:0 "Reino o imperio"
+ tcp_ai_powerful_vassal:0 "Vasallo poderoso"
+ tcp_ai_faction_member:0 "Miembro de una facción"
 
  tcp_refused_title_creation_opinion:0 "Denegó la creación de mi título"
 

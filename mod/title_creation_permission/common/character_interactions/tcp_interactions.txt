@@ -252,7 +252,49 @@ tcp_request_title_creation_interaction = {
 		}
 	}
 
-	# The top liege is always a player, who answers in person, so there is no ai_accept.
+	# The answer of an AI top liege, only possible with the All Realms game rule.
+	# A player top liege answers in person.
+	ai_accept = {
+		base = 0
+
+		opinion_modifier = {
+			who = scope:recipient
+			opinion_target = scope:actor
+			multiplier = 0.75
+			desc = AI_OPINION_REASON
+		}
+
+		modifier = {
+			add = 25
+			exists = scope:actor.dynasty
+			scope:actor.dynasty = scope:recipient.dynasty
+			desc = tcp_ai_same_dynasty
+		}
+
+		modifier = {
+			add = 15
+			scope:actor = { is_close_family_of = scope:recipient }
+			desc = tcp_ai_close_family
+		}
+
+		modifier = {
+			add = -25
+			scope:target.tier >= tier_kingdom
+			desc = tcp_ai_kingdom_tier
+		}
+
+		modifier = {
+			add = -30
+			scope:actor = { is_powerful_vassal = yes }
+			desc = tcp_ai_powerful_vassal
+		}
+
+		modifier = {
+			add = -50
+			scope:actor = { is_a_faction_member = yes }
+			desc = tcp_ai_faction_member
+		}
+	}
 
 	# AI vassals ask only for titles they could create: they control most of the de jure counties
 	ai_targets = {

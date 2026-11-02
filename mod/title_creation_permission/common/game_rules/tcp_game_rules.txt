@@ -3,6 +3,7 @@
 # the Crown Authority set by tcp_required_crown_authority, or an administrative emperor:
 #	vanilla:       nobody, titles are created as in vanilla
 #	player_realms: vassals whose top liege is a player (realms with an AI top liege stay vanilla)
+#	all_realms:    every vassal, whether their top liege is a player or the AI
 tcp_title_creation_permission = {
 	categories = { flavor }
 
@@ -11,6 +12,8 @@ tcp_title_creation_permission = {
 	tcp_title_creation_permission_vanilla = {}
 
 	tcp_title_creation_permission_player_realms = {}
+
+	tcp_title_creation_permission_all_realms = {}
 }
 
 # The lowest Crown Authority at which a feudal top liege requires permission.

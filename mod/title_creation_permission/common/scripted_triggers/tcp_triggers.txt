@@ -50,13 +50,21 @@ tcp_ruler_restricts_title_creation_trigger = {
 # Root is the character.
 # Only the top liege counts: under a player emperor, the vassals of an AI king need the
 # emperor's permission too, because their top liege is the player.
+#	tcp_title_creation_permission_player_realms: only when the top liege is a player
+#	tcp_title_creation_permission_all_realms:    whether the top liege is a player or the AI
 tcp_needs_permission_trigger = {
-	has_game_rule = tcp_title_creation_permission_player_realms
+	OR = {
+		has_game_rule = tcp_title_creation_permission_player_realms
+		has_game_rule = tcp_title_creation_permission_all_realms
+	}
 	is_independent_ruler = no
 	exists = top_liege
 	top_liege != this
 	top_liege = {
-		is_ai = no
+		trigger_if = {
+			limit = { has_game_rule = tcp_title_creation_permission_player_realms }
+			is_ai = no
+		}
 		tcp_ruler_restricts_title_creation_trigger = yes
 	}
 }

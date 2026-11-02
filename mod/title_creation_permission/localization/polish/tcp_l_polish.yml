@@ -4,6 +4,8 @@
  setting_tcp_title_creation_permission_vanilla_desc:0 "All [vassals|E] create [titles|E] as in vanilla."
  setting_tcp_title_creation_permission_player_realms:0 "Player Realms"
  setting_tcp_title_creation_permission_player_realms_desc:0 "Only in realms whose [top_liege|E] is a player: all [vassals|E] there, direct or indirect, need the player's permission to create [titles|E] when the player is [feudal|E] with the [crown_authority|E] set by the #V TCP: Required Crown Authority#! rule (by default, [GetLaw('crown_authority_3').GetName]), or is an [administrative_government|E] [emperor|E]. Realms with an AI [top_liege|E] work as in vanilla.\n\nThey can ask for permission with the #V Request Title Creation#! interaction, and the [top_liege|E] can grant it with #V Grant Title Creation#!."
+ setting_tcp_title_creation_permission_all_realms:0 "All Realms"
+ setting_tcp_title_creation_permission_all_realms_desc:0 "In every realm, whether its [top_liege|E] is a player or the AI: all [vassals|E], direct or indirect, need their [top_liege|E]'s permission to create [titles|E] when the [top_liege|E] is [feudal|E] with the [crown_authority|E] set by the #V TCP: Required Crown Authority#! rule (by default, [GetLaw('crown_authority_3').GetName]), or is an [administrative_government|E] [emperor|E]. This includes you if you are the vassal of an AI [top_liege|E].\n\nAn AI [top_liege|E] answers each request by their opinion of the vassal, a shared dynasty or close family, the rank of the [title|E], and whether the vassal is powerful or in a faction."
 
  rule_tcp_required_crown_authority:0 "#color_light_red TCP:#! Required Crown Authority"
  setting_tcp_required_crown_authority_3:0 "Absolute"
@@ -51,6 +53,12 @@
  tcp_grant_title_creation_toast:0 "Title Creation Allowed"
  tcp_permission_granted_tt:0 "You may create [tcp_title.GetName] within the next #V 5#! years"
  tcp_permission_declined_tt:0 "You may not create [tcp_title.GetName]"
+
+ tcp_ai_same_dynasty:0 "Same dynasty"
+ tcp_ai_close_family:0 "Close family"
+ tcp_ai_kingdom_tier:0 "Kingdom or empire"
+ tcp_ai_powerful_vassal:0 "Powerful vassal"
+ tcp_ai_faction_member:0 "Member of a faction"
 
  tcp_refused_title_creation_opinion:0 "Refused My Title Creation"
 

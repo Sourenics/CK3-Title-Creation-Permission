@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0
+
+- New option **All Realms** for the game rule **TCP: Title Creation Permission**: the restriction applies to every realm, whether its top liege is a player or the AI. AI vassals ask their AI top liege, who decides by their opinion of the vassal, a shared dynasty or close family, the rank of the title (kingdoms and empires are harder) and whether the vassal is a powerful vassal or a faction member. A player who is the vassal of an AI top liege needs their permission too. Requested on the Steam Workshop.
+- **Player Realms** stays the default, so existing games work as before.
+
 ## 1.1.2
 
 - **Fixed:** the vassal's answer to your decision on a title creation request did not show its text in the message feed, and `error.log` reported the missing keys `tcp_msg_vassal_answer_accepted_desc` and `tcp_msg_vassal_answer_refused_desc`. The answer letters now show as intended.
